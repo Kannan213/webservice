@@ -3,10 +3,7 @@ package com.msk.college.controller;
 import com.msk.college.domain.Student;
 import com.msk.college.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
@@ -17,6 +14,11 @@ public class StudentController {
     @GetMapping("/students")
     public Iterable<Student> findAllStudents() {
         return studentRepo.findAll();
+    }
+
+    @GetMapping("/students/{id}")
+    public Student findOneStudent(@PathVariable("id") long id) {
+        return studentRepo.findById(id).orElse(null);
     }
 
     @PostMapping("/students/add")
